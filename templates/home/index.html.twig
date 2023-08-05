@@ -1,0 +1,95 @@
+
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}DEVIS ASSURANCE | WIASSUR{% endblock %}
+
+{# Bloc destiné à recevoir le CSS spécifique à la page #}
+{% block stylesheets %}
+
+{% endblock %}
+
+{# Bloc destiné à recevoir le contenu HTML de la page #}
+{% block body %}
+<!-- Simulation de devis -->
+<main class="container" id="app" v-cloak>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card ">
+                <div class="d-flex mb-2">
+                    <img style="margin:auto" src="{{ asset('img/logo.png') }}" alt="">
+                </div>
+                <div class="card-header text-black bg-purple-light">Devis assurance auto</div>
+                <div class="card-body">
+
+                    <!-- Evaluation devis -->
+                    <div class="mb-4">
+                        <div class="d-flex mb-2">
+                            <h5 class="card-title flex-grow-1">Propiétaire</h5>
+                        </div>
+                        <form method="post" @submit.prevent="addSimulation" class="row g-3">
+                            <div class="col-3">
+                                <label for="nom" class="form-label">Nom(s)</label>
+                                <input required type="text" class="form-control" id="nom" v-model="user.nom">
+                            </div>
+                            <div class="col-6">
+                                <label for="prenom" class="form-label">Prénom(s)</label>
+                                <input required type="text" class="form-control" id="prenom" v-model="user.prenom">
+                            </div>
+                            <div class="col-3">
+                                <label for="agePro" class="form-label">Age</label>
+                                <input required type="text" @keyup="checkSimulation" class="form-control" id="agePro" v-model="user.agePro" >
+                            </div>
+                            <div class="d-flex mb-2">
+                                <h5 class="card-title flex-grow-1">Voiture</h5>
+                            </div>
+                            <div class="col-3">
+                                <label for="pf" class="form-label">Puissance fiscale</label>
+                                <input required type="text" class="form-control" id="pf" v-model="voiture.pf">
+                            </div>
+                            <div class="col-3">
+                                <label for="ageVoiture" class="form-label">Age véhicule</label>
+                                <input required type="text" class="form-control" id="ageVoiture" v-model="voiture.ageVoit">
+                            </div>
+                            <div class="col-3">
+                                <label for="inputDatenaissance" class="form-label">Marque</label>
+                                <input required type="text" class="form-control" id="inputDatenaissance" v-model="voiture.marque">
+                            </div>
+                            <div class="col-3">
+                                <label for="selectNiveauScolaire" class="form-label">Modèle</label>
+                                <select required id="selectNiveauScolaire" @click="checkSimulation" class="form-select" v-model="voiture.modele">
+                                    <option value=""></option>
+                                    <option value="3">Coupé</option>
+                                    <option value="2">Berline</option>
+                                    <option value="3.5">Pick-Up</option>
+                                    <option value="4">SUV</option>
+                                </select>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <h5 class="card-title flex-grow-1">Estimation de cout d'assurance</h5>
+                            </div>
+                            <div class="col-3">
+                                <label for="cout" class="form-label">Cout d'assurance de votre voiture</label>
+                                <input disabled type="text" class="form-control" id="cout" v-model="cout">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-car"></i> Devis</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Fin Evaluation devis -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+<!-- Fin Simulation de devis -->
+{% endblock %}
+
+{# Bloc destiné à recevoir le javascript spécifique à la page #}
+{% block javascripts %}
+
+{% endblock %}
+
+
