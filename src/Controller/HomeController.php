@@ -35,8 +35,8 @@ class HomeController extends AbstractController
         $voiture = $data[1];
         $cout = $data[2];
 
+        //Création et hydratation de l'objet
         $entityManager = $doctrine->getManager();
-        //Enregistrement des informations en base de données
         $simulation = new Simulation();
         $simulation->setNom($user->nom);
         $simulation->setPrenom($user->prenom);
@@ -48,6 +48,7 @@ class HomeController extends AbstractController
         $simulation->setCout((int)$cout);
         $simulation->setCritereAgeUser((int)$user->agePro);
         $simulation->setCritereModelVoiture((int)$voiture->modele);
+        //Enregistrement des informations en base de données
         $entityManager->persist($simulation);
         $entityManager->flush();
 
@@ -55,7 +56,7 @@ class HomeController extends AbstractController
     }
 
 
-    //Fonction permettant de calculer selon l'age du propriétaire et le modèle de la voiture
+    //Fonction permettant de calculer selon l'âge du propriétaire et le modèle de la voiture
     private function calculDevisParCritere($user, $voiture) : int {
 
         $multiplicateur = 0;
@@ -79,7 +80,7 @@ class HomeController extends AbstractController
         //Multiplicateur selon le modèle de la voiture
         switch ($modeleVoiture) {
             case 1:
-                $multiplicateur = $multiplicateur + 3; 
+                $multiplicateur = $multiplicateur +3; 
                 break;
             case 2:
                 $multiplicateur = $multiplicateur +2; 
@@ -94,8 +95,8 @@ class HomeController extends AbstractController
         }
 
         //Cout de la simulation selon les critères
-        $dotation_fiscale = (int)$this->getParameter('app.dotation_fiscale'); //Dotation fiscale
+        $coutDassuranceBase = (int)$this->getParameter('app.assurance_base'); //Cout d'assurance de base
         
-        return $dotation_fiscale*$multiplicateur;
+        return $coutDassuranceBase*$multiplicateur;
     }
 }
