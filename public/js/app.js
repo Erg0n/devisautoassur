@@ -1,4 +1,13 @@
-
+// Permet de vérifier les informations soumises au formulaire
+function InputIsEmpty(data) {
+  let flag = false;
+  for (const elt in data) {
+    if (data[elt] == "") {
+      flag = true;
+    }
+  }
+  return flag;
+}
 // Instanciation de VUE JS
 
 const App = {
